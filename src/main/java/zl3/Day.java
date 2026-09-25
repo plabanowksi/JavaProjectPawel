@@ -26,26 +26,14 @@ public enum Day {
         return dayNumber;
     }
 
-    private static Day fromId(int id) {
-        for (Day day : values()) {
-            if (day.dayNumber == id) {
-                return day;
-            }
-        }
-        throw new IllegalArgumentException("Wrong number day: " + id);
+    public String isWeekend() {
+        return this == Day.SATURDAY || this == Day.SUNDAY
+                ? "Weekend"
+                : "Workday";
     }
 
-    public static String isWeekend(int getDay) {
-        if (getDay == SATURDAY.dayNumber || getDay == SUNDAY.dayNumber) {
-            return "Weekend";
-        } else {
-            return "Workday";
-        }
-    }
-
-    static String getDepartureTime(int dayNumber) {
-        Day day = Day.fromId(dayNumber);
-        return switch (day) {
+    public  String getDepartureTime() {
+        return switch (this) {
             case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -> "05:30";
             case SATURDAY -> "07:00";
             case SUNDAY -> "09:00";
