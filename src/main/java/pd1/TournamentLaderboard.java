@@ -27,12 +27,11 @@ public class TournamentLaderboard {
             }
             int sumOfResults = sumResults(scores); // suma wynniku dla gracza
             sumOfPlayerResults[i] = sumOfResults;
-            players[i] = new Player(id, scores, false, sumOfResults);
+            players[i] = new Player(id, scores, sumOfResults);
         }
 
         setWinner(players, playersNumber, sumOfPlayerResults);
 
-        //tu wywolac sortowanie
 
         showResults(players);
         sn.close();
@@ -41,7 +40,7 @@ public class TournamentLaderboard {
     private static void setWinner(Player[] players, int playersNumber, int[] sumOfPlayerResults) {
         for (int j = 0; j < playersNumber; j++) {
             if (players[j].getSumOfResults() == maxResult(sumOfPlayerResults)) {
-                players[j].isWinner = true;
+                players[j].markAsWinner();
                 break;
             }
         }

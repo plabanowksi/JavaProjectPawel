@@ -1,16 +1,16 @@
 package pd1;
 
-public class Player implements Comparable{
-    private final int [] results;
+public class Player implements Comparable<Player> {
+    private final int[] results;
     private final int id;
     private final int sumOfResults;
-    boolean isWinner;
+    private boolean isWinner;
 
-    Player(int id, int[] results, boolean isWinner, int sumOfResults){
+    Player(int id, int[] results, int sumOfResults) {
         this.id = id;
         this.results = results;
-        this.isWinner = isWinner;
-        this.sumOfResults=sumOfResults;
+        this.isWinner = false;
+        this.sumOfResults = sumOfResults;
     }
 
     public int getSumOfResults() {
@@ -29,9 +29,12 @@ public class Player implements Comparable{
         return results;
     }
 
+    public void markAsWinner() {
+        isWinner = true;
+    }
+
     @Override
-    public int compareTo(Object o) {
-        Player other = (Player) o;
-        return Integer.compare(other.sumOfResults, this.sumOfResults);
+    public int compareTo(Player p) {
+        return Integer.compare(p.sumOfResults, this.sumOfResults);
     }
 }
