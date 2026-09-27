@@ -41,7 +41,7 @@ public class TournamentLaderboard {
         for (int j = 0; j < playersNumber; j++) {
             if (players[j].getSumOfResults() == maxResult(sumOfPlayerResults)) {
                 players[j].markAsWinner();
-                break;
+
             }
         }
     }
@@ -50,8 +50,8 @@ public class TournamentLaderboard {
         return scores[0] + scores[1] + scores[2];
     }
 
-    private static int getAverageResult(int scores) {
-        return scores / 3;
+    private static double getAverageResult(int scores) {
+        return scores / 3.0;
     }
 
     private static int minResult(int[] scores) {
