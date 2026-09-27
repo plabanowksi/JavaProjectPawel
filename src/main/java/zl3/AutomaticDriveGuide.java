@@ -1,6 +1,5 @@
 package zl3;
 
-import java.util.Optional;
 import java.util.Scanner;
 
 import static zl3.Day.*;
@@ -11,10 +10,9 @@ public class AutomaticDriveGuide {
         Scanner sn = new Scanner(System.in);
         int dayInput = sn.nextInt();
 
-        Optional<Day> day = getDayByValue(dayInput);
-        day.ifPresentOrElse(
+        getDayByValue(dayInput).ifPresentOrElse(
                 d -> System.out.println(
-                        getDriveGuicePlan(d.name(), d.getDepartureTime(), d.isWeekend())),
+                        getDriveGuicePlan(d.name(), d.getDepartureTime(), d.checkIfitsWeekend())),
                 () -> System.out.println("You just inserted wrong number, try again")
         );
 

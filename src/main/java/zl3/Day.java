@@ -26,7 +26,7 @@ public enum Day {
         return dayNumber;
     }
 
-    public String isWeekend() {
+    public String checkIfitsWeekend() {
         return this == Day.SATURDAY || this == Day.SUNDAY
                 ? "Weekend"
                 : "Workday";
