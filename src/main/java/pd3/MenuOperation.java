@@ -3,7 +3,7 @@ package pd3;
 import java.util.Arrays;
 import java.util.Optional;
 
-public enum Menu {
+public enum MenuOperation {
     FACTORIALREC,
     FACTORIALITER,
     PRIME,
@@ -15,8 +15,8 @@ public enum Menu {
     BONUS;
 
 
-    public static Optional<Menu> getMenuByValue(String menuInput) {
-        return Arrays.stream(Menu.values())
+    public static Optional<MenuOperation> getOptionbyValue(String menuInput) {
+        return Arrays.stream(MenuOperation.values())
                 .filter(menu -> menu.name().equalsIgnoreCase(menuInput))
                 .findFirst();
     }

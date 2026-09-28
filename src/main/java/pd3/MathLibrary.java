@@ -117,7 +117,7 @@ public class MathLibrary {
         }
     }
 
-    public static void menuMathLibrary(Menu operation, Scanner sn) {
+    public static void menuMathLibrary(MenuOperation operation, Scanner sn) {
         switch (operation) {
             case FACTORIALREC -> {
                 System.out.println("Insert input:");
