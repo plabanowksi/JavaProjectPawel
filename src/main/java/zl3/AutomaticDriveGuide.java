@@ -12,7 +12,7 @@ public class AutomaticDriveGuide {
 
         getDayByValue(dayInput).ifPresentOrElse(
                 d -> System.out.println(
-                        getDriveGuicePlan(d.name(), d.getDepartureTime(), d.checkIfitsWeekend())),
+                        getDriveGuicePlan(d.name(), d.getDepartureTime(), d.getWeekendStatus())),
                 () -> System.out.println("You just inserted wrong number, try again")
         );
 
