@@ -20,10 +20,10 @@ public class RentalSystem {
         double totalCost = 0;
         for (Rental rental : rentals) {
 
-            if (rental.resource.type == ResourceType.BOOK) {
+            if (rental.resource.getType() == ResourceType.BOOK) {
                 totalCost += rental.resource.calculateRentalCost(rental.days, rental.resource.getPrice());
             }
-            if (rental.resource.type == ResourceType.MOVIE) {
+            if (rental.resource.getType() == ResourceType.MOVIE) {
                 totalCost = rental.resource.calculateRentalCost(rental.days, rental.resource.getPrice());
 
             }

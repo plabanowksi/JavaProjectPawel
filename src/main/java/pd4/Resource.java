@@ -1,12 +1,16 @@
 package pd4;
 
 public abstract class Resource implements Comparable<Resource> {
-    final int id;
-    final String name;
-    final double price;
-    final ResourceType type;
+    private final int id;
+    private final String name;
+    protected final double price;
+    protected final ResourceType type;
+
 
     protected Resource(int id, String name, double price, ResourceType type) {
+        if (price <=0){
+            throw new IllegalArgumentException();
+        }
         this.id = id;
         this.name = name;
         this.price = price;
@@ -21,6 +25,10 @@ public abstract class Resource implements Comparable<Resource> {
 
     public double getPrice() {
         return price;
+    }
+
+    public ResourceType getType() {
+        return type;
     }
 
     @Override

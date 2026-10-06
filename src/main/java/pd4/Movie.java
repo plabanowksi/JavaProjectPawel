@@ -1,7 +1,7 @@
 package pd4;
 
 public class Movie extends Resource {
-    final int timeInMinutes;
+    private final int timeInMinutes;
 
     protected Movie(int id, String name, double price, ResourceType type, int timeInMinutes) {
         super(id, name, price, type);

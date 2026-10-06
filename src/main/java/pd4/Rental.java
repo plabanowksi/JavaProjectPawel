@@ -1,9 +1,9 @@
 package pd4;
 
 public class Rental {
-    Resource resource;
-    int days;
-    RentalStatus status;
+    protected Resource resource;
+    protected int days;
+    private RentalStatus status;
 
     public Rental(Resource resource, int days, RentalStatus status) {
         this.resource = resource;
