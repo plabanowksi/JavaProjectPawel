@@ -1,7 +1,7 @@
 package zl4;
 
 public class Electronic extends Product {
-    int warranty;
+    private final int warranty;
 
     Electronic(String name, Double price, String category, int warranty) {
         super(name, price, category);

@@ -12,7 +12,6 @@ public abstract class Product {
     }
 
     protected String getDescription(Product product) {
-
         return String.format("Product name: %s \nProduct price: %s\nProduct category: %s\n", product.name, product.price, product.category);
     }
 }
