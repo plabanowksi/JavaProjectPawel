@@ -9,7 +9,7 @@ import pd5.service.NotificationService;
 import java.time.LocalDateTime;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         String onehundredsixtyChars = "x".repeat(160);
         LocalDateTime localDateTime = LocalDateTime.now();

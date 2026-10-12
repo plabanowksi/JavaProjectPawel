@@ -21,9 +21,9 @@ public class ConsultantNote {
         return isArchived;
     }
 
-    public void editNote(String newContent) {
+    public void editNote(String newContent) throws Exception {
         if (this.isArchived()) {
-            System.out.println("This note has been already archived and cannot be changed!");
+            throw new Exception("This note has been already archived and cannot be changed!");
         } else {
             archive();
             this.content = newContent;
