@@ -5,7 +5,7 @@ import pd5.model.Notification;
 public class NotificationService {
     public void sentNotifications(Notification[] notifications) {
         for (Notification notification : notifications) {
-            notification.send();
+            notification.sendNotification();
         }
     }
 }

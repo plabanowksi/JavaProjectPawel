@@ -15,20 +15,7 @@ public abstract class Notification {
         this.id = id;
         this.content = content;
         this.createdAt = createdAt;
-        this.sent = sent;
     }
 
-    public boolean send() {
-        if (sent) {
-            System.out.println("Notification has beed already sent.");
-            return false;
-        } else {
-            System.out.println("Sending notification...");
-            sent = true;
-        }
-        sent = sendNotification();
-        return sent;
-    }
-
-    protected abstract boolean sendNotification();
+    public abstract void sendNotification();
 }

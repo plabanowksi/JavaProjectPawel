@@ -21,9 +21,9 @@ public class Main {
         NotificationService service = new NotificationService();
         service.sentNotifications(notifications);
         ConsultantNote consultantNote = new ConsultantNote(5, "blablabla", localDateTime, "Paweł");
-        consultantNote.editNote(consultantNote);
-
+        String newContent = "newcontent String";
+        consultantNote.editNote(newContent);
         System.out.println("Trying to edit previous note:");
-        consultantNote.editNote(consultantNote);
+        consultantNote.editNote(newContent);
     }
 }

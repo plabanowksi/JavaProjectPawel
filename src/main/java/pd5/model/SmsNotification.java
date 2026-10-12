@@ -14,8 +14,7 @@ public class SmsNotification extends Notification {
     }
 
     @Override
-    protected boolean sendNotification() {
+    public void sendNotification() {
         System.out.println("Sending notification by SMS on number: " + phoneNumber);
-        return true;
     }
 }

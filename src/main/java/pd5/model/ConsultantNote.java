@@ -1,7 +1,6 @@
 package pd5.model;
 
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 public class ConsultantNote {
     private final long id;
@@ -18,51 +17,23 @@ public class ConsultantNote {
         this.isArchived = false;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public boolean isArchived() {
+    private boolean isArchived() {
         return isArchived;
     }
 
-    public void setArchived(boolean archived) {
-        isArchived = archived;
-    }
-
-    public void editNote(ConsultantNote consultantNote) {
-        if (!consultantNote.isArchived()) {
-            Scanner sn = new Scanner(System.in);
-            String noteContent = consultantNote.getContent();
-            System.out.println("Old content:");
-            System.out.println(noteContent);
-            System.out.println("Type new content:");
-            String newContent = sn.nextLine();
-            consultantNote.setContent(newContent);
-            System.out.println(archiveNote(consultantNote));
-            sn.close();
+    public void editNote(String newContent) {
+        if (this.isArchived()) {
+            System.out.println("This note has been already archived and cannot be changed!");
         } else {
-            System.out.println(archiveNote(consultantNote));
+            archive();
+            this.content = newContent;
+            System.out.println("This note has been archived successfully");
         }
     }
 
-    private String archiveNote(ConsultantNote consultantNote) {
-        String result;
-        if (consultantNote.isArchived()) {
-            result = "This note has been already archived and cannot be changed!";
-            return result;
-        } else {
-            archive(consultantNote);
-            result = "This note has been archived successfully";
+    private void archive() {
+        if (!this.isArchived) {
+            this.isArchived = true;
         }
-        return result;
-    }
-
-    private void archive(ConsultantNote consultantNote) {
-        consultantNote.setArchived(true);
     }
 }

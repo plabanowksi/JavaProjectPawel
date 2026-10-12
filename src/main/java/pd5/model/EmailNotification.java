@@ -13,8 +13,7 @@ public class EmailNotification extends Notification {
     }
 
     @Override
-    protected boolean sendNotification() {
+    public void sendNotification() {
         System.out.println("Sending notification by e-mail to: " + recipient + ", with subject: " + subject);
-        return true;
     }
 }
