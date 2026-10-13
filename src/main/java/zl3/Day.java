@@ -1,8 +1,10 @@
 package zl3;
 
+import lombok.AllArgsConstructor;
 import java.util.Arrays;
 import java.util.Optional;
 
+@AllArgsConstructor
 public enum Day {
     MONDAY(1),
     TUESDAY(2),
@@ -14,17 +16,10 @@ public enum Day {
 
     private final int dayNumber;
 
-    Day(int dayNumber) {
-        this.dayNumber = dayNumber;
-    }
-
     public static Optional<Day> getDayByValue(int day) {
-        return Arrays.stream(Day.values()).filter(dayNumber -> dayNumber.getNumberRepresentation() == day).findFirst();
+        return Arrays.stream(Day.values()).filter(dayNumber -> dayNumber.dayNumber == day).findFirst();
     }
 
-    private int getNumberRepresentation() {
-        return dayNumber;
-    }
 
     public String getWeekendStatus() {
         return this == Day.SATURDAY || this == Day.SUNDAY
@@ -32,7 +27,7 @@ public enum Day {
                 : "Workday";
     }
 
-    public  String getDepartureTime() {
+    public String getDepartureTime() {
         return switch (this) {
             case MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY -> "05:30";
             case SATURDAY -> "07:00";

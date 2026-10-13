@@ -1,12 +1,12 @@
 package zl4;
 
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+@RequiredArgsConstructor
+@SuperBuilder
 public class Electronic extends Product {
     private final int warranty;
-
-    Electronic(String name, Double price, String category, int warranty) {
-        super(name, price, category);
-        this.warranty = warranty;
-    }
 
     @Override
     protected String getDescription(Product product) {

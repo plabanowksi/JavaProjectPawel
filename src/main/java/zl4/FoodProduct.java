@@ -1,14 +1,13 @@
 package zl4;
 
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import java.time.LocalDate;
 
+@RequiredArgsConstructor
+@SuperBuilder
 public class FoodProduct extends Product {
     LocalDate expiryDate;
-
-    FoodProduct(String name, Double price, String category, LocalDate expiryDate) {
-        super(name, price, category);
-        this.expiryDate = expiryDate;
-    }
 
     @Override
     protected String getDescription(Product product) {
