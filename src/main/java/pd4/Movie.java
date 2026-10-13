@@ -1,12 +1,12 @@
 package pd4;
 
+import lombok.Getter;
+import lombok.experimental.SuperBuilder;
+
+@Getter
+@SuperBuilder
 public class Movie extends Resource {
     private final int timeInMinutes;
-
-    protected Movie(int id, String name, double price, ResourceType type, int timeInMinutes) {
-        super(id, name, price, type);
-        this.timeInMinutes = timeInMinutes;
-    }
 
     protected double calculateRentalCost(int days, double price) {
         return days * (0.05 * price);

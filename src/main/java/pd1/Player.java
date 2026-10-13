@@ -1,33 +1,14 @@
 package pd1;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
+@Getter
 public class Player implements Comparable<Player> {
-    private final int[] results;
     private final int id;
+    private final int[] results;
     private final int sumOfResults;
-    private boolean isWinner;
-
-    Player(int id, int[] results, int sumOfResults) {
-        this.id = id;
-        this.results = results;
-        this.isWinner = false;
-        this.sumOfResults = sumOfResults;
-    }
-
-    public int getSumOfResults() {
-        return sumOfResults;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public boolean isWinner() {
-        return isWinner;
-    }
-
-    public int[] getResults() {
-        return results;
-    }
+    private boolean isWinner = false;
 
     public void markAsWinner() {
         isWinner = true;

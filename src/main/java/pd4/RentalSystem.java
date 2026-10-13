@@ -1,9 +1,11 @@
 package pd4;
 
+import lombok.ToString;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+@ToString
 public class RentalSystem {
 
     private final List<Rental> rentals;
@@ -54,12 +56,5 @@ public class RentalSystem {
         for (Rental resource : rentals) {
             System.out.println(resource);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "RentalSystem{" +
-                "rentals=" + rentals +
-                '}';
     }
 }
