@@ -23,12 +23,12 @@ public class OperationResult<T> {
         if (value == null) {
             throw new IllegalArgumentException("Value cannot be null!");
         }
-        return new OperationResult<>(true, value, "Operation successful.");
+        return new OperationResult<>(true, value, null);
     }
 
     public static <T> OperationResult<T> failure(String message) {
         if (message == null || message.isBlank()) {
-            throw new IllegalArgumentException("Message cannot be empty.");
+            throw new IllegalArgumentException("Message cannot be empty!");
         }
         return new OperationResult<>(false, null, message);
     }
