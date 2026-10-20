@@ -3,7 +3,7 @@ package pd6.service;
 import lombok.RequiredArgsConstructor;
 
 import pd6.repository.EntityStorage;
-import pd6.entity.User;
+import pd6.model.User;
 import util.Optional;
 
 @RequiredArgsConstructor

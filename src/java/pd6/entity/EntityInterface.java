@@ -1,4 +1,4 @@
-package pd6.entity;
+package pd6.model;
 
 public interface EntityInterface <E>{
     E getId();

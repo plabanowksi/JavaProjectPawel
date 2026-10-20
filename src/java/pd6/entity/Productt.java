@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class Productt implements pd6.entity.EntityInterface<String> {
+public class Productt implements pd6.model.EntityInterface<String> {
     private final String id;
     private final String name;
 

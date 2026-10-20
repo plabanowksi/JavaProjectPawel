@@ -2,7 +2,7 @@ package pd6.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.ToString;
-import pd6.entity.EntityInterface;
+import pd6.model.EntityInterface;
 
 import util.Collection;
 import util.HashMap;

@@ -1,8 +1,8 @@
 
 
 import pd6.repository.EntityStorage;
-import pd6.entity.Productt;
-import pd6.entity.User;
+import pd6.model.Productt;
+import pd6.model.User;
 import pd6.service.UserService;
 
 public class Main {
