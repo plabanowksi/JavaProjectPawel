@@ -8,13 +8,16 @@ import java.util.function.Predicate;
 public class EventProcessor {
 
     public void process(List<Event> events, List<Predicate<Event>> filters,
-                         Function<Event, String> formatter, Consumer<String> output){
+                        Function<Event, String> formatter, Consumer<String> output) {
         for (Event event : events) {
+            boolean matchesAll = true;
             for (Predicate<Event> filter : filters) {
-                if(filter.test(event)){
-                    output.accept(formatter.apply(event));
-                    break;
+                if (!filter.test(event)) {
+                    matchesAll = false;
                 }
+            }
+            if (matchesAll) {
+                output.accept(formatter.apply(event));
             }
         }
     }

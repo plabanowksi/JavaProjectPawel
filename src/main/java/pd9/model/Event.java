@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class Event {
-    private final UUID id= UUID.randomUUID();
+    private final UUID id = UUID.randomUUID();
     private final String name;
     private final EventStatus eventStatus;
     private final String description;

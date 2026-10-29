@@ -31,14 +31,14 @@ public class Main {
                 + event.getEventStatus();
         Function<Event, String> formatterDesc = Event::getDescription;
 
-        Consumer<String> output = System.out::println;
+        Consumer<String> printer = System.out::println;
 
         EventProcessor eventProcessor = new EventProcessor();
         System.out.println("Success full format:");
-        eventProcessor.process(events, filtersSuccess, formatterFull, output);
+        eventProcessor.process(events, filtersSuccess, formatterFull, printer);
         System.out.println("Errors short format:");
-        eventProcessor.process(events, filtersError, formatterShort, output);
+        eventProcessor.process(events, filtersError, formatterShort, printer);
         System.out.println("All event descriptions:");
-        eventProcessor.process(events, allFilters, formatterDesc, output);
+        eventProcessor.process(events, allFilters, formatterDesc, printer);
     }
 }
