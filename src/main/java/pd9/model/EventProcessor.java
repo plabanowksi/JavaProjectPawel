@@ -1,4 +1,4 @@
-package pd9;
+package pd9.model;
 
 import java.util.List;
 import java.util.function.Consumer;
