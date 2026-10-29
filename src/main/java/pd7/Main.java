@@ -1,9 +1,11 @@
+
 package pd7;
 
 import pd7.model.Destination;
 import pd7.model.TransportType;
 import pd7.model.Trip;
 import pd7.model.User;
+import pd7.repository.TripRepository;
 import pd7.service.TripService;
 
 import java.util.List;
@@ -17,9 +19,14 @@ public class Main {
             new Trip(new Destination("Czech", "Prague"), TransportType.TRAIN, 99.99, 12)
         );
 
-        TripService tripService = new TripService();
-        System.out.println(tripService.findByDestination(listOfTrips, "Russia"));
-        System.out.println(tripService.findBestTrip(new User("pawel", TransportType.PLANE, 200.0), listOfTrips));
-        System.out.println(tripService.buildTripDescription(new User("pawel", TransportType.PLANE, 200.0), listOfTrips));
+        TripRepository tripRepository = new TripRepository();
+        tripRepository.addAllTrips(listOfTrips);
+        TripService tripService = new TripService(tripRepository);
+
+        User user = new User("pawel", TransportType.PLANE, 200.0);
+
+        System.out.println(tripService.findByDestination("Russia"));
+        System.out.println(tripService.findBestTrip(user, listOfTrips));
+        System.out.println(tripService.buildTripDescription(user, listOfTrips));
     }
 }
