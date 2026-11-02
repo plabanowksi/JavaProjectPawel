@@ -11,11 +11,11 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class Ticket {
     private long id;
-    private String title;
-    private String description;
+    private final String title;
+    private final String description;
     private TicketStatus status;
     private Priority priority;
     private Category category;
-    private User reporter;
-    private User assignee;
+    private final User reporter;
+    private  User assignee;
 }

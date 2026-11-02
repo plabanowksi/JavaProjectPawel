@@ -11,6 +11,6 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class User {
     private long id;
-    private String name;
+    private final String name;
     private String role;
 }
