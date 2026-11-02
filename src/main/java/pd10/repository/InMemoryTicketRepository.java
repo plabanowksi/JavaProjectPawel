@@ -9,7 +9,7 @@ import pd10.model.User;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class InMemoryTicketRepository implements TicketRepository{
+public class InMemoryTicketRepository implements TicketRepository {
     private final Map<Long, Ticket> storage = new HashMap<>();
 
     private final AtomicLong idCounter = new AtomicLong(1);
@@ -66,5 +66,4 @@ public class InMemoryTicketRepository implements TicketRepository{
             .filter(ticket -> ticket.getAssignee() == null)
             .toList();
     }
-
 }

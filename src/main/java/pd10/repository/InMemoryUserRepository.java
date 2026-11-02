@@ -5,7 +5,7 @@ import pd10.model.User;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class InMemoryUserRepository implements UserRepository{
+public class InMemoryUserRepository implements UserRepository {
     private final Map<Long, User> storage = new HashMap<>();
 
     private final AtomicLong idCounter = new AtomicLong(1);

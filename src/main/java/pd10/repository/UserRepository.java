@@ -13,4 +13,3 @@ public interface UserRepository {
     List<User> findAll();
 
 }
-

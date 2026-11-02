@@ -18,12 +18,11 @@ public class Main {
         ServiceDeskService serviceDeskService = new ServiceDeskService(inMemoryTicketRepository, inMemoryUserRepository);
 
         User adminPawel = serviceDeskService.registerUser("Pawel", "Admin");
-        serviceDeskService.registerTicket(1,"title","description", TicketStatus.NEW, Priority.LOW, Category.ADMINS, adminPawel,adminPawel);
-        serviceDeskService.assignTicket(1,adminPawel);
+        serviceDeskService.registerTicket(1, "title", "description", TicketStatus.NEW, Priority.LOW, Category.ADMINS, adminPawel, adminPawel);
+        serviceDeskService.assignTicket(1, adminPawel);
         serviceDeskService.startWorkingOnTicket(1);
         serviceDeskService.closeTicket(1);
         System.out.println(serviceDeskService.getTicketDetails(1));
-
 
     }
 }

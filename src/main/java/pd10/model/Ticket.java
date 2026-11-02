@@ -17,5 +17,5 @@ public class Ticket {
     private Priority priority;
     private Category category;
     private final User reporter;
-    private  User assignee;
+    private User assignee;
 }

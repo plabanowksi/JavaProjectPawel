@@ -6,6 +6,7 @@ import lombok.Setter;
 import pd10.model.*;
 import pd10.repository.TicketRepository;
 import pd10.repository.UserRepository;
+
 import java.util.Comparator;
 import java.util.List;
 
@@ -34,8 +35,8 @@ public class ServiceDeskService {
     }
 
     public void startWorkingOnTicket(long ticketId) {
-        Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(()-> new IllegalArgumentException("Can't find ticket with ID: " + ticketId));
-        if (ticket.getStatus() != TicketStatus.NEW){
+        Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalArgumentException("Can't find ticket with ID: " + ticketId));
+        if (ticket.getStatus() != TicketStatus.NEW) {
             throw new IllegalArgumentException("You can only start working on ticket withs status NEW");
         }
         ticket.setStatus(TicketStatus.IN_PROGRESS);
@@ -44,7 +45,7 @@ public class ServiceDeskService {
 
     public void closeTicket(long ticketId) {
         Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalArgumentException("Can't find ticket with ID: " + ticketId));
-        if (ticket.getStatus() == TicketStatus.CLOSED){
+        if (ticket.getStatus() == TicketStatus.CLOSED) {
             throw new IllegalArgumentException("You can only close ticket with status INPROGRESS or NEW");
         }
         ticket.setStatus(TicketStatus.CLOSED);
@@ -59,12 +60,11 @@ public class ServiceDeskService {
 
     public List<Ticket> filterAndSortTickets(TicketStatus status, Category category, long employeeId) {
         return ticketRepository.findAll().stream()
-            .filter(ticket -> status ==null || ticket.getStatus() == status).
+            .filter(ticket -> status == null || ticket.getStatus() == status).
             filter(ticket -> category == null || ticket.getCategory() == category)
-            .filter( ticket -> ticket.getAssignee() != null && ticket.getAssignee().getId() == employeeId)
+            .filter(ticket -> ticket.getAssignee() != null && ticket.getAssignee().getId() == employeeId)
             .sorted(Comparator.comparing(Ticket::getId))
             .toList();
 
     }
-
 }
