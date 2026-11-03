@@ -7,7 +7,7 @@ import pd10.model.User;
 import pd10.repository.InMemoryTicketRepository;
 import pd10.repository.InMemoryUserRepository;
 import pd10.service.ReportService;
-import pd10.service.ServiceDeskService;
+import pd10.service.ServiceDeskFacade;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,10 +15,10 @@ public class Main {
         InMemoryUserRepository inMemoryUserRepository = new InMemoryUserRepository();
 
         ReportService reportService = new ReportService(inMemoryTicketRepository);
-        ServiceDeskService serviceDeskService = new ServiceDeskService(inMemoryTicketRepository, inMemoryUserRepository);
+        ServiceDeskFacade serviceDeskService = new ServiceDeskFacade(inMemoryTicketRepository, inMemoryUserRepository);
 
         User adminPawel = serviceDeskService.registerUser("Pawel", "Admin");
-        serviceDeskService.registerTicket(1, "title", "description", TicketStatus.NEW, Priority.LOW, Category.ADMINS, adminPawel, adminPawel);
+        serviceDeskService.registerTicket(1, "title", "description", TicketStatus.NEW, Priority.LOW, Category.ADMINS, 1, 1);
         serviceDeskService.assignTicket(1, adminPawel);
         serviceDeskService.startWorkingOnTicket(1);
         serviceDeskService.closeTicket(1);

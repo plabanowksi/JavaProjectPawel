@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ServiceDeskService {
+public class ServiceDeskFacade {
     private final TicketRepository ticketRepository;
     private final UserRepository userRepository;
 
@@ -22,7 +22,7 @@ public class ServiceDeskService {
         return userRepository.save(user);
     }
 
-    public Ticket registerTicket(long id, String title, String description, TicketStatus status, Priority priority, Category category, User reporter, User assignee) {
+    public Ticket registerTicket(long id, String title, String description, TicketStatus status, Priority priority, Category category, long reporter, long assignee) {
         Ticket ticket = new Ticket(id, title, description, status, priority, category, reporter, assignee);
         return ticketRepository.save(ticket);
     }
@@ -30,7 +30,7 @@ public class ServiceDeskService {
     public void assignTicket(long ticketId, User employee) {
         Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalArgumentException("Can't find ticket with ID: " + ticketId));
         User user = userRepository.findById(employee.getId()).orElseThrow(() -> new IllegalArgumentException("Can't find user with ID: " + employee.getId()));
-        ticket.setAssignee(user);
+        ticket.setAssignee(user.getId());
         ticketRepository.save(ticket);
     }
 
@@ -45,10 +45,10 @@ public class ServiceDeskService {
 
     public void closeTicket(long ticketId) {
         Ticket ticket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalArgumentException("Can't find ticket with ID: " + ticketId));
-        if (ticket.getStatus() == TicketStatus.CLOSED) {
+        if (ticket.isClosed()) {
             throw new IllegalArgumentException("You can only close ticket with status INPROGRESS or NEW");
         }
-        ticket.setStatus(TicketStatus.CLOSED);
+        ticket.markClosed();
         ticketRepository.save(ticket);
     }
 
@@ -62,7 +62,7 @@ public class ServiceDeskService {
         return ticketRepository.findAll().stream()
             .filter(ticket -> status == null || ticket.getStatus() == status).
             filter(ticket -> category == null || ticket.getCategory() == category)
-            .filter(ticket -> ticket.getAssignee() != null && ticket.getAssignee().getId() == employeeId)
+            .filter(ticket -> ticket.getAssignee() > 0 && ticket.getAssignee() == employeeId)
             .sorted(Comparator.comparing(Ticket::getId))
             .toList();
 

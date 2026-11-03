@@ -16,6 +16,22 @@ public class Ticket {
     private TicketStatus status;
     private Priority priority;
     private Category category;
-    private final User reporter;
-    private User assignee;
+    private final long reporter;
+    private long assignee;
+
+    public boolean isClosed() {
+        return this.status == null || this.getStatus() == TicketStatus.CLOSED;
+    }
+
+    public boolean isOpen() {
+        return this.status == null || this.getStatus() != TicketStatus.CLOSED;
+    }
+
+    public void markClosed() {
+        this.status = TicketStatus.CLOSED;
+    }
+
+    public boolean isUnassigned() {
+        return this.getAssignee() == 0L;
+    }
 }

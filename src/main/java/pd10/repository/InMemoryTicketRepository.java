@@ -7,11 +7,11 @@ import pd10.model.TicketStatus;
 import pd10.model.User;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class InMemoryTicketRepository implements TicketRepository {
-    private final Map<Long, Ticket> storage = new HashMap<>();
-
+    private final ConcurrentHashMap<Long, Ticket> storage = new ConcurrentHashMap<>();
     private final AtomicLong idCounter = new AtomicLong(1);
 
     @Override
@@ -54,8 +54,8 @@ public class InMemoryTicketRepository implements TicketRepository {
             return findByPriorityAndAssigneeIsNull(null);
         }
         return storage.values().stream()
-            .filter(ticket -> ticket.getAssignee() != null
-                && ticket.getAssignee().getId() == assignee.getId())
+            .filter(ticket -> ticket.getAssignee() > 0
+                && ticket.getAssignee() == assignee.getId())
             .toList();
     }
 
@@ -63,7 +63,7 @@ public class InMemoryTicketRepository implements TicketRepository {
     public List<Ticket> findByPriorityAndAssigneeIsNull(Priority priority) {
         return storage.values().stream()
             .filter(ticket -> ticket.getPriority() == priority)
-            .filter(ticket -> ticket.getAssignee() == null)
+            .filter(ticket -> ticket.getAssignee() > 0)
             .toList();
     }
 }

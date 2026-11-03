@@ -1,23 +1,20 @@
 package pd10.service;
 
+import lombok.RequiredArgsConstructor;
 import pd10.model.Category;
 import pd10.model.Priority;
 import pd10.model.Ticket;
 import pd10.model.TicketStatus;
-import pd10.model.User;
 import pd10.repository.TicketRepository;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 public class ReportService {
 
     private final TicketRepository ticketRepository;
-
-    public ReportService(TicketRepository ticketRepository) {
-        this.ticketRepository = ticketRepository;
-    }
 
     public Map<TicketStatus, Map<Category, Long>> getTicketsCountByStatusAndCategory() {
         return ticketRepository.findAll().stream()
@@ -27,10 +24,10 @@ public class ReportService {
             ));
     }
 
-    public Map<User, Long> getActiveTicketsCountPerEmployee() {
+    public Map<Long, Long> getActiveTicketsCountPerEmployee() {
         return ticketRepository.findAll().stream()
-            .filter(t -> t.getAssignee() != null)
-            .filter(t -> t.getStatus() != TicketStatus.CLOSED)
+            .filter(Ticket::isUnassigned)
+            .filter(Ticket::isOpen)
             .collect(Collectors.groupingBy(
                 Ticket::getAssignee,
                 Collectors.counting()
@@ -48,6 +45,6 @@ public class ReportService {
             return true;
         }
         return allTickets.stream()
-            .allMatch(t -> t.getStatus() == TicketStatus.CLOSED);
+            .allMatch(Ticket::isClosed);
     }
 }
