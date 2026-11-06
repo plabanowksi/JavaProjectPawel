@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         CsvSalesLoader loader = new CsvSalesLoader();
-        Path csvFile =DIR.resolve("sales.csv");
+        Path csvFile = DIR.resolve("sales.csv");
         List<Product> products = loader.loadSales(csvFile);
 
         System.out.println("Initialize: " + products.size() + "records");

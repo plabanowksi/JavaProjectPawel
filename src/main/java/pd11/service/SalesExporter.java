@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import pd11.model.Product;
+import pd11.model.Report;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,14 +20,15 @@ public class SalesExporter {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-        Map<String, Object> reportData = new HashMap<>();
-        reportData.put("totalRevenue", salesService.calculateTotalRevenue(products));
-        reportData.put("top3Products", salesService.getTop3ProductsByRevenue(products));
-        reportData.put("revenueByCategory", salesService.getRevenueByCategory(products));
-        reportData.put("averageUnitPriceByCategory", salesService.getAverageUnitPriceByCategory(products));
-        reportData.put("dayWithHighestSales", salesService.getDayWithHighestSales(products));
+        Report report = new Report(
+            salesService.calculateTotalRevenue(products),
+            salesService.getTop3ProductsByRevenue(products),
+            salesService.getRevenueByCategory(products),
+            salesService.getAverageUnitPriceByCategory(products),
+            salesService.getDayWithHighestSales(products)
+        );
 
-        mapper.writeValue(outputPath.toFile(), reportData);
+        mapper.writeValue(outputPath.toFile(), report);
     }
 
     public void exportSummaryToCsv(Path outputPath, Map<String, Double> revenueByCategory, Map<String, Double> avgPriceByCategory) throws IOException {
