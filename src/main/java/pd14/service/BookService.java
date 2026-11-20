@@ -21,11 +21,13 @@ public class BookService {
     }
 
     public Book findByIsbn(String isbn) {
-        Book book = books.get(isbn);
-        if (book == null) {
-            throw new BookNotFoundException(isbn);
+        if (isbn == null) {
+            throw new BookNotFoundException(null);
         }
-        return book;
+        return books.values().stream()
+            .filter(book -> isbn.equals(book.getIsbn()))
+            .findFirst()
+            .orElseThrow(() -> new BookNotFoundException(isbn));
     }
 
     public Book findByid(Long bookId) {
