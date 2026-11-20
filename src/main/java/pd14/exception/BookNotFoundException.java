@@ -1,7 +1,7 @@
 package pd14.exception;
 
 public class BookNotFoundException extends RuntimeException {
-    public BookNotFoundException(Long bookId) {
+    public BookNotFoundException(String bookId) {
         super("Book not found: " + bookId);
     }
 }

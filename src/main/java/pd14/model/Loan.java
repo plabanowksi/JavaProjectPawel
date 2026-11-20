@@ -20,13 +20,7 @@ public class Loan {
 
     public boolean isOverdue() {
         return this.returnedAt == null
-                && this.dueDate != null
-                && this.dueDate.isBefore(LocalDate.now());
-    }
-
-    public void markAsReturned() {
-        if (this.returnedAt == null) {
-            this.returnedAt = LocalDateTime.now();
-        }
+            && this.dueDate != null
+            && this.dueDate.isBefore(LocalDate.now());
     }
 }

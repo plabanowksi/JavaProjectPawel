@@ -16,16 +16,15 @@ public class Book {
     private final int year;
     private int availableCopies;
 
-    private void borrow(){
-        if(this.availableCopies>0){
-            this.availableCopies = this.availableCopies-1;
-        }
-        else{
+    private void borrow() {
+        if (this.availableCopies > 0) {
+            this.availableCopies = this.availableCopies - 1;
+        } else {
             throw new BookNotAvailableException();
         }
     }
-    private void returnBack(){
+
+    public void returnBack() {
         this.availableCopies++;
     }
 }
-

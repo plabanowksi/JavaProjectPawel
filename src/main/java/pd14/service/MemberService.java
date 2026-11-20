@@ -14,23 +14,22 @@ public class MemberService {
     private final Map<Long, Member> members = new HashMap<>();
     private final AtomicLong idGenerator = new AtomicLong(1);
 
-    public Member register(String name, String email){
+    public Member register(String name, String email) {
         Long memberId = idGenerator.getAndIncrement();
         Member member = new Member(memberId, name, email, new ArrayList<>());
         members.put(memberId, member);
         return member;
     }
 
-    public Member findById(Long memberId){
+    public Member findById(Long memberId) {
         Member member = members.get(memberId);
-        if(member==null){
+        if (member == null) {
             throw new MemberNotFoundException(memberId);
         }
         return member;
     }
 
-    public List<Loan> getActiveLoans(Long memberId){
-        return
-
+    public List<Loan> getActiveLoans(Long memberId) {
+        return members.get(memberId).getLoans();
     }
 }

@@ -16,10 +16,10 @@ public class Member {
     private final String email;
     private List<Loan> loans;
 
-    private boolean canBorrow() {
+    public boolean canBorrow() {
         if (this.loans.stream()
-                .filter(loan -> loan.getReturnedAt() == null)
-                .count() < 3) {
+            .filter(loan -> loan.getReturnedAt() == null)
+            .count() < 3) {
 
             return true;
         } else {
