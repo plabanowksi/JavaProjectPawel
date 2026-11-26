@@ -71,8 +71,6 @@ public class LoanService {
             throw new IllegalStateException("Book already returned.");
         }
         returnBook(loan);
-
-
     }
 
     public List<LoanDto> findOverdue() {
