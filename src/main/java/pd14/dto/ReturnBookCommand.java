@@ -1,5 +1,5 @@
 package pd14.dto;
 
-public record ReturnBookRequest(
+public record ReturnBookCommand(
     Long loanId) {
 }

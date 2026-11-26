@@ -17,6 +17,7 @@ public class Loan {
     private final LocalDateTime borrowedAt;
     private LocalDate dueDate;
     private LocalDateTime returnedAt;
+    private boolean isActive;
 
     public boolean isOverdue() {
         return this.returnedAt == null

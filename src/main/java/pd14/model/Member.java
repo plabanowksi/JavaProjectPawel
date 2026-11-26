@@ -1,20 +1,19 @@
 package pd14.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import pd14.exception.LoanLimitExceededException;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
-@Setter
 public class Member {
     private final Long id;
     private final String name;
     private final String email;
-    private List<Loan> loans;
+    private final List<Loan> loans = new ArrayList<>();
 
     public boolean canBorrow() {
         if (this.loans.stream()

@@ -1,5 +1,6 @@
 package pd14.controller;
 
+import lombok.RequiredArgsConstructor;
 import pd14.dto.LoanDto;
 import pd14.dto.MemberDto;
 import pd14.model.Loan;
@@ -8,36 +9,27 @@ import pd14.service.MemberService;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
 
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
-    }
-
     public MemberDto register(String name, String email) {
-        Member member = memberService.register(name, email);
-        return toMemberDto(member);
+        return memberService.register(name, email);
     }
 
     public MemberDto findById(Long memberId) {
         Member member = memberService.findById(memberId);
-        return toMemberDto(member);
+        return new MemberDto(
+            member.getId(),
+            member.getName(),
+            member.getEmail()
+        );
     }
 
     public List<LoanDto> getActiveLoans(Long memberId) {
         return memberService.getActiveLoans(memberId).stream()
             .map(this::toLoanDto)
             .toList();
-    }
-
-    private MemberDto toMemberDto(Member member) {
-
-        return new MemberDto(
-            member.getId(),
-            member.getName(),
-            member.getEmail()
-        );
     }
 
     private LoanDto toLoanDto(Loan loan) {

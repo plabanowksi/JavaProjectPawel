@@ -16,9 +16,9 @@ public class Book {
     private final int year;
     private int availableCopies;
 
-    private void borrow() {
+    public void borrow() {
         if (this.availableCopies > 0) {
-            this.availableCopies = this.availableCopies - 1;
+            this.availableCopies -= 1;
         } else {
             throw new BookNotAvailableException();
         }

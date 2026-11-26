@@ -1,35 +1,41 @@
 package pd14.service;
 
+import lombok.RequiredArgsConstructor;
+import pd14.dto.MemberDto;
 import pd14.exception.MemberNotFoundException;
 import pd14.model.Loan;
 import pd14.model.Member;
+import pd14.repository.MemberRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
+@RequiredArgsConstructor
 public class MemberService {
-    private final Map<Long, Member> members = new HashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong(1);
 
-    public Member register(String name, String email) {
-        Long memberId = idGenerator.getAndIncrement();
-        Member member = new Member(memberId, name, email, new ArrayList<>());
-        members.put(memberId, member);
-        return member;
+    private final MemberRepository memberRepository;
+
+    public MemberDto register(String name, String email) {
+        Long memberId = memberRepository.generateId();
+
+        Member member = new Member(memberId, name, email);
+
+        memberRepository.save(member);
+
+        return new MemberDto(memberId, name, email);
     }
 
     public Member findById(Long memberId) {
-        Member member = members.get(memberId);
+        Member member = memberRepository.findById(memberId);
+
         if (member == null) {
             throw new MemberNotFoundException(memberId);
         }
+
         return member;
     }
 
     public List<Loan> getActiveLoans(Long memberId) {
-        return members.get(memberId).getLoans();
+        Member member = findById(memberId);
+        return member.getLoans();
     }
 }

@@ -10,10 +10,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
-    public BookDto addBook(String isbn, String title, String author, int year, int availableCopies){
+
+    public BookDto addBook(String isbn, String title, String author, int year, int availableCopies) {
         Book book = bookService.addBook(isbn, title, author, year, availableCopies);
         return toDto(book);
     }
+
     public BookDto findByIsbn(String isbn) {
         Book book = bookService.findByIsbn(isbn);
         return toDto(book);

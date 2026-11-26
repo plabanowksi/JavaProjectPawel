@@ -2,45 +2,55 @@ package pd14.service;
 
 import pd14.exception.BookNotFoundException;
 import pd14.model.Book;
+import pd14.repository.BookRepository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class BookService {
 
-    private final Map<Long, Book> books = new HashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong(1);
+    private final BookRepository bookRepository;
 
-    public Book addBook(String isbn, String title, String author, int year, int availableCopies) {
-        Long bookId = idGenerator.getAndIncrement();
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+    public Book addBook(String isbn, String title, String author,
+                        int year, int availableCopies) {
+
+        Long bookId = bookRepository.generateId();
+
         Book book = new Book(bookId, isbn, title, author, year, availableCopies);
-        books.put(bookId, book);
+
+        bookRepository.save(book);
+
         return book;
     }
 
     public Book findByIsbn(String isbn) {
         if (isbn == null) {
-            throw new BookNotFoundException(null);
+            throw new IllegalArgumentException("Isbn can't be empty.");
         }
-        return books.values().stream()
+
+        return bookRepository.findAll().stream()
             .filter(book -> isbn.equals(book.getIsbn()))
             .findFirst()
             .orElseThrow(() -> new BookNotFoundException(isbn));
     }
 
-    public Book findByid(Long bookId) {
-        Book book = books.get(bookId);
+    public Book findById(Long bookId) {
+        Book book = bookRepository.findById(bookId);
+
         if (book == null) {
-            throw new BookNotFoundException(bookId.toString());
+            throw new BookNotFoundException(bookId);
         }
+
         return book;
     }
 
     public List<Book> findAvailable() {
-        return books.values().stream()
-            .filter(book -> book.getAvailableCopies() > 0).toList();
+        return bookRepository.findAll().stream()
+            .filter(book -> book.getAvailableCopies() > 0)
+            .toList();
     }
 
     public List<Book> search(String query) {
@@ -49,7 +59,8 @@ public class BookService {
         }
 
         String normalizeQuery = query.toLowerCase().trim();
-        return books.values().stream()
+
+        return bookRepository.findAll().stream()
             .filter(book -> matches(book, normalizeQuery))
             .toList();
     }
