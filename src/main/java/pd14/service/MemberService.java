@@ -18,7 +18,7 @@ public class MemberService {
         Long memberId = memberRepository.generateId();
 
         Member member = new Member(memberId, name, email);
-
+        member.hasValidEmail();
         memberRepository.save(member);
 
         return new MemberDto(memberId, name, email);

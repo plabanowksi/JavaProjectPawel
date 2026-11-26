@@ -25,4 +25,7 @@ public class Member {
             throw new LoanLimitExceededException();
         }
     }
+    public boolean hasValidEmail() {
+        return this.email != null && this.email.contains("@");
+    }
 }

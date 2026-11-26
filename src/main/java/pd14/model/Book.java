@@ -2,12 +2,10 @@ package pd14.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import pd14.exception.BookNotAvailableException;
 
 @AllArgsConstructor
 @Getter
-@Setter
 public class Book {
     private final Long id;
     private final String isbn;
