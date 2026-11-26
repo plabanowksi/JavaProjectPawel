@@ -14,7 +14,7 @@ public class Main {
 
         LocalDate from = LocalDate.of(2026, 11, 1);
         LocalDate to = LocalDate.of(2026, 11, 30);
-        System.out.println(dateCalculator.businessDaysBetween(from, to));
+        System.out.println(dateCalculator.daysUntil(from, to));
         System.out.println(dateCalculator.formatForLocale(LocalDateTime.now(), "Europe/London"));
 
         ZonedDateTime dateTime = ZonedDateTime.now(ZoneId.of("Europe/Warsaw"));
